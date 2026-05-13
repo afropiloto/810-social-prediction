@@ -1,0 +1,49 @@
+{
+  "entities": {
+    "Market": {
+      "title": "Market",
+      "description": "A prediction market",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "question": { "type": "string" },
+        "creatorId": { "type": "string" }
+      },
+      "required": ["id", "question", "creatorId"]
+    },
+    "User": {
+      "title": "User",
+      "description": "App user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" }
+      },
+      "required": ["id", "username"]
+    },
+    "CultureMetrics": {
+      "title": "CultureMetrics",
+      "description": "Community culture metrics",
+      "type": "object",
+      "properties": {
+        "day": { "type": "string" },
+        "attention": { "type": "number" }
+      },
+      "required": ["day", "attention"]
+    }
+  },
+  "firestore": {
+    "/markets/{marketId}": {
+      "schema": "Market",
+      "description": "Collection of markets"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Collection of users"
+    },
+    "/cultureMetrics/{day}": {
+      "schema": "CultureMetrics",
+      "description": "Community culture metrics for a day"
+    }
+  }
+}

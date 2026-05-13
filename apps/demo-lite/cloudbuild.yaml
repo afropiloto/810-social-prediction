@@ -1,0 +1,21 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "$_IMAGE",
+        "--build-arg",
+        "VITE_PRIVY_APP_ID=$_VITE_PRIVY_APP_ID",
+        ".",
+      ]
+images:
+  - "$_IMAGE"
+
+options:
+  machineType: "E2_HIGHCPU_8"
+
+substitutions:
+  _IMAGE: "us-central1-docker.pkg.dev/one-491501/cloud-run-source-deploy/810-demo-lite:latest"
+  _VITE_PRIVY_APP_ID: ""
+

@@ -1,30 +1,25 @@
-# 810 — social attention prediction markets
+# 810 — monorepo (evaluation / beta)
 
-Phase path: **PM-AMM on HyperEVM (testnet → mainnet)** until HIP-4 stake is available; then optional native CLOB (HIP-4).
+Single repo so tools (e.g. Claude Code) can see the full surface area.
 
-## Why this repo
+## Layout
 
-- Single place for contracts + API + deployment notes.
-- Default branch: `main`.
+| Path | Description |
+|------|-------------|
+| `apps/demo-lite/` | User app + Express API (Vite, Privy, Firestore, trade/admin routes). |
+| `apps/admin-v3/` | Admin UI (Vite + Privy), calls demo-lite API. |
+| `packages/onchain/` | Foundry workspace (escrow + binary market contracts, tests). |
 
-## Stack (recommended for this phase)
+## Copy notes
 
-| Layer | Choice |
-|--------|--------|
-| Contracts | **Foundry**, Solidity 0.8.x, OpenZeppelin |
-| Chain | **HyperEVM** (testnet first), `chainId` per official docs |
-| Liquidity | **PM-AMM (LMSR or CFMM)** on-chain; no external CLOB MVP |
-| Oracle | **UMA OOv3** on the same EVM where you deploy (confirm deployment) |
-| API | **Node.js** (TypeScript), Cloud Run |
-| Index | Start **Firestore** or **Postgres** — Postgres when you need SQL analytics + strict joins; Firestore is fine for first beta |
-| HL | **API signing** for hedges / inventory later; not required for pure PM-AMM beta |
+- **Excluded from copy:** `node_modules/`, `dist/`, `.next/`, `out/`, `cache/`, nested `.git/`, and other heavy/derived dirs.
+- After clone, run **`npm ci`** in each `apps/*` and **`forge install`** / **`forge build`** in `packages/onchain` as needed.
 
-## Do not build an external CLOB for MVP
+## Product direction (short)
 
-An external CLOB adds: matching engine ops, trust model, latency, MM capital, and duplicate book state vs HIP-4 later. **PM-AMM until HIP-4** is the practical path.
+- **810 prediction markets** for social attention outcomes.
+- **Testnet first** on HyperEVM; **PM-AMM** path until HIP-4 stake is viable; avoid claiming native CLOB where it is not implemented.
 
-## Next steps
+## Remote
 
-1. Deploy PM-AMM + market factory + oracle adapter to **HyperEVM testnet**.
-2. Wire existing frontend to this API (no UI rewrite).
-3. Add HL execution only when needed (hedge or post-HIP-4).
+Push target: `origin` → GitHub `810-social-prediction` (see `git remote -v`).

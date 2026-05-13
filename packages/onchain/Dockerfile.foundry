@@ -1,0 +1,17 @@
+FROM ghcr.io/foundry-rs/foundry:latest
+
+WORKDIR /app
+COPY . .
+
+# Ensure output directory is writable in container builds
+USER root
+RUN mkdir -p /app/out /app/cache && chmod -R a+rwx /app
+
+# Speed up: pre-fetch deps & build
+RUN forge --version && forge build
+
+USER foundry
+
+ENTRYPOINT ["forge"]
+CMD ["test", "-vvv"]
+

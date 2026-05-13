@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+}
+
+@layer base {
+  :root {
+    --bg: #f9f9f9;
+    --ink: #000000;
+    --panel: #efefef;
+    --border: #d4d4d4;
+    --muted: #737373;
+    --accent: #FF9900;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --warning: #d97706;
+  }
+
+  .dark {
+    --bg: #000000;
+    --ink: #ffffff;
+    --panel: #111111;
+    --border: #333333;
+    --muted: #a3a3a3;
+    --accent: #CCFF00;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+  will-change: transform;
+}
+
+.marquee-container:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Custom Scrollbar for moveable thumb scrolling */
+.thumb-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.thumb-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
